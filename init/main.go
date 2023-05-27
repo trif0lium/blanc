@@ -37,3 +37,13 @@ func mount(source, target, fileSystemType string, flags uintptr) {
 		panic(err)
 	}
 }
+
+func setHostname(hostname string) {
+	if err := syscall.Sethostname([]byte(hostname)); err != nil {
+		panic(err)
+	}
+
+	if err := os.WriteFile("/etc/hostname", []byte(hostname), 0755); err != nil {
+		panic(err)
+	}
+}
