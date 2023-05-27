@@ -23,4 +23,4 @@ jobs:
         with:
           name: vmlinux-5.10
           tag_name: vmlinux-5.10
-          files: linux-5.10.180/vmlinux
+          files: vmlinux/linux-5.10.180/vmlinux
