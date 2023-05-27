@@ -9,4 +9,14 @@ type ImageConfig struct {
 }
 
 func main() {
+	imageConfig := ImageConfig{
+		Entrypoint: "/whoami",
+		Cmd:        "",
+		Env: []string{
+			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+			"WHOAMI_NAMe=/blanc/init.json",
+		},
+		WorkingDir: "/",
+		User:       "",
+	}
 }
