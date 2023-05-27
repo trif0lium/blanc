@@ -15,3 +15,4 @@ jobs:
       - run: sudo apt install wget build-essential bison flex libncurses-dev libssl-dev libelf-dev
       - run: wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.10.180.tar.xz
       - run: tar xavf linux-5.10.180.tar.xz
+      - run: git clone https://github.com/firecracker-microvm/firecracker
