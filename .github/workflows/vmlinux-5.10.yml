@@ -12,3 +12,4 @@ jobs:
         working-directory: vmlinux
     steps:
       - uses: actions/checkout@v2
+      - run: sudo apt install wget build-essential bison flex libncurses-dev libssl-dev libelf-dev
