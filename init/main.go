@@ -14,7 +14,7 @@ func main() {
 		Cmd:        "",
 		Env: []string{
 			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-			"WHOAMI_NAMe=/blanc/init.json",
+			"WHOAMI_NAME=/blanc/init.json",
 		},
 		WorkingDir: "/",
 		User:       "",
