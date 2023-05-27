@@ -4,6 +4,9 @@ on:
   push:
     paths: '.github/workflows/vmlinux-5.10.yml'
 
+permissions:
+  contents: write
+
 jobs:
   vmlinux:
     runs-on: ubuntu-22.04
