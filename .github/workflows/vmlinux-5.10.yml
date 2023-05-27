@@ -19,3 +19,8 @@ jobs:
       - run: mv firecracker/resources/guest_configs/microvm-kernel-x86_64-5.10.config linux-5.10.180/.config
       - run: cd linux-5.10.180 && make vmlinux
       - run: find . -name "vmlinux*"
+      - uses: softprops/action-gh-release@v1
+        with:
+          name: vmlinux-5.10
+          tag_name: vmlinux-5.10
+          files: linux-5.10.180/vmlinux
