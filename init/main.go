@@ -1,5 +1,10 @@
 package main
 
+import (
+	"os"
+	"syscall"
+)
+
 type ImageConfig struct {
 	Entrypoint string
 	Cmd        string
@@ -18,5 +23,17 @@ func main() {
 		},
 		WorkingDir: "/",
 		User:       "",
+	}
+}
+
+func mount(source, target, fileSystemType string, flags uintptr) {
+	if _, err := os.Stat(target); os.IsNotExist(err) {
+		if err := os.MkdirAll(target, 0755); err != nil {
+			panic(err)
+		}
+	}
+
+	if err := syscall.Mount(source, target, fileSystemType, flags, ""); err != nil {
+		panic(err)
 	}
 }
