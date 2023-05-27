@@ -17,3 +17,4 @@ jobs:
       - run: tar xavf linux-5.10.180.tar.xz
       - run: git clone https://github.com/firecracker-microvm/firecracker
       - run: mv firecracker/resources/guest_configs/microvm-kernel-x86_64-5.10.config linux-5.10.180/.config
+      - run: cd linux-5.10.180 && make vmlinux
