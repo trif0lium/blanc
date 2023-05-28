@@ -24,6 +24,13 @@ func main() {
 		WorkingDir: "/",
 		User:       "",
 	}
+
+	mount("none", "/proc", "proc", 0)
+	mount("none", "/dev/pts", "devpts", 0)
+	mount("none", "/dev/mqueue", "mqueue", 0)
+	mount("none", "/dev/shm", "tmpfs", 0)
+	mount("none", "/sys", "sysfs", 0)
+	mount("none", "/sys/fs/cgroup", "cgroup", 0)
 }
 
 func mount(source, target, fileSystemType string, flags uintptr) {
