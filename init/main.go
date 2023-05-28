@@ -31,6 +31,8 @@ func main() {
 	mount("none", "/dev/shm", "tmpfs", 0)
 	mount("none", "/sys", "sysfs", 0)
 	mount("none", "/sys/fs/cgroup", "cgroup", 0)
+
+	setHostname("blanc")
 }
 
 func mount(source, target, fileSystemType string, flags uintptr) {
