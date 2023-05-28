@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"os/exec"
 	"syscall"
 )
 
@@ -33,6 +34,21 @@ func main() {
 	mount("none", "/sys/fs/cgroup", "cgroup", 0)
 
 	setHostname("blanc")
+
+	cmd := exec.Command(imageConfig.Entrypoint)
+	cmd.Env = imageConfig.Env
+	cmd.Dir = imageConfig.WorkingDir
+	cmd.Stdin = os.Stdin
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	if err := cmd.Start(); err != nil {
+		panic(err)
+	}
+
+	if err := cmd.Wait(); err != nil {
+		panic(err)
+	}
 }
 
 func mount(source, target, fileSystemType string, flags uintptr) {
