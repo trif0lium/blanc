@@ -109,6 +109,16 @@ func main() {
 						},
 					)
 
+					httpRequest(&httpClient,
+						"/drives/rootfs",
+						map[string]any{
+							"drive_id":       "rootfs",
+							"path_on_host":   filepath.Join(workingDir, "rootfs.img"),
+							"is_root_device": true,
+							"is_read_only":   false,
+						},
+					)
+
 					return nil
 				},
 			},
