@@ -119,6 +119,13 @@ func main() {
 						},
 					)
 
+					httpRequest(&httpClient,
+						"/actions",
+						map[string]any{
+							"action_type": "InstanceStart",
+						},
+					)
+
 					return nil
 				},
 			},
