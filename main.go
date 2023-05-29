@@ -84,6 +84,10 @@ func main() {
 						return err
 					}
 
+					if err := exec.CommandContext(cCtx.Context, "firecracker", "--api-sock", filepath.Join(workingDir, "firecracker.sock")).Run(); err != nil {
+						return err
+					}
+
 					return nil
 				},
 			},
