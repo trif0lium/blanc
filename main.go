@@ -52,35 +52,35 @@ func main() {
 						return err
 					}
 
-					cmd := exec.CommandContext(
+					cmd = exec.CommandContext(
 						cCtx.Context,
 						"umoci",
 						"unpack",
 						"--image", filepath.Join(workingDir, "container")+":latest",
-						filepath.Join(workingDir, "container/unpacked")
+						filepath.Join(workingDir, "container/unpacked"),
 					)
 
 					if err := cmd.Run(); err != nil {
 						return err
 					}
 
-					if err := exec.CommandContext(cCtx.Context, "fallocate", "-l", "5G", filepath.Join(workingDir, "rootfs.img")); err != nil {
+					if err := exec.CommandContext(cCtx.Context, "fallocate", "-l", "5G", filepath.Join(workingDir, "rootfs.img")).Run(); err != nil {
 						return err
 					}
 
-					if err := exec.CommandContext(cCtx.Context, "mkfs.ext4", filepath.Join(workingDir, "rootfs.img")); err != nil {
+					if err := exec.CommandContext(cCtx.Context, "mkfs.ext4", filepath.Join(workingDir, "rootfs.img")).Run(); err != nil {
 						return err
 					}
 
-					if err := exec.CommandContext(cCtx.Context, "mount", "-o", "loop", filepath.Join(workingDir, "rootfs.img"), filepath.Join(workingDir, "rootfs")); err != nil {
+					if err := exec.CommandContext(cCtx.Context, "mount", "-o", "loop", filepath.Join(workingDir, "rootfs.img"), filepath.Join(workingDir, "rootfs")).Run(); err != nil {
 						return err
 					}
 
-					if err := exec.CommandContext(cCtx.Context, "cp", "-R", filepath.Join(workingDir, "container/rootfs"), filepath.Join(workingDir, "rootfs")); err != nil {
+					if err := exec.CommandContext(cCtx.Context, "cp", "-R", filepath.Join(workingDir, "container/rootfs"), filepath.Join(workingDir, "rootfs")).Run(); err != nil {
 						return err
 					}
 
-					if err := exec.CommandContext(cCtx.Context, "umount", filepath.Join(workingDir, "rootfs")); err != nil {
+					if err := exec.CommandContext(cCtx.Context, "umount", filepath.Join(workingDir, "rootfs")).Run(); err != nil {
 						return err
 					}
 
