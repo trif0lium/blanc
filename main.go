@@ -36,7 +36,7 @@ func main() {
 						return err
 					}
 
-					if err := os.MkdirAll(filepath.Join(workingDir, "container/unpacked", 0755)); err != nil {
+					if err := os.MkdirAll(filepath.Join(workingDir, "container/unpacked"), 0755); err != nil {
 						return err
 					}
 
