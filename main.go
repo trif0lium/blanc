@@ -76,7 +76,7 @@ func main() {
 						return err
 					}
 
-					if err := exec.CommandContext(cCtx.Context, "cp", "-R", filepath.Join(workingDir, "container/rootfs"), filepath.Join(workingDir, "rootfs")).Run(); err != nil {
+					if err := exec.CommandContext(cCtx.Context, "cp", "-R", filepath.Join(workingDir, "container/unpacked/rootfs"), filepath.Join(workingDir, "rootfs")).Run(); err != nil {
 						return err
 					}
 
