@@ -18,10 +18,12 @@ func main() {
 				Name: "run",
 				Action: func(cCtx *cli.Context) error {
 					imageRef := cCtx.Args().First()
-					vmID, err := gonanoid.New("abcdefghijklmnopqrstuvwxyz", 17)
+
+					vmID, err := gonanoid.Generate("abcdefghijklmnopqrstuvwxyz", 17)
 					if err != nil {
 						return err
 					}
+
 					return nil
 				},
 			},
