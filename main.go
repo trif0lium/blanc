@@ -64,6 +64,26 @@ func main() {
 						return err
 					}
 
+					if err := exec.CommandContext(cCtx.Context, "fallocate", "-l", "5G", filepath.Join(workingDir, "rootfs.img")); err != nil {
+						return err
+					}
+
+					if err := exec.CommandContext(cCtx.Context, "mkfs.ext4", filepath.Join(workingDir, "rootfs.img")); err != nil {
+						return err
+					}
+
+					if err := exec.CommandContext(cCtx.Context, "mount", "-o", "loop", filepath.Join(workingDir, "rootfs.img"), filepath.Join(workingDir, "rootfs")); err != nil {
+						return err
+					}
+
+					if err := exec.CommandContext(cCtx.Context, "cp", "-R", filepath.Join(workingDir, "container/rootfs"), filepath.Join(workingDir, "rootfs")); err != nil {
+						return err
+					}
+
+					if err := exec.CommandContext(cCtx.Context, "umount", filepath.Join(workingDir, "rootfs")); err != nil {
+						return err
+					}
+
 					return nil
 				},
 			},
