@@ -85,6 +85,14 @@ func main() {
 						return err
 					}
 
+					if err := os.MkdirAll(filepath.Join(workingDir, "rootfs/blanc"), 0755); err != nil {
+						return err
+					}
+
+					if err := exec.CommandContext(cCtx.Context, "cp", filepath.Join(WORKING_DIRECTORY, "/init"), filepath.Join(workingDir, "rootfs/blanc")).Run(); err != nil {
+						return err
+					}
+
 					if err := exec.CommandContext(cCtx.Context, "umount", filepath.Join(workingDir, "rootfs")).Run(); err != nil {
 						return err
 					}
