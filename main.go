@@ -2,7 +2,9 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
+	"net"
 	"net/http"
 	"os"
 	"os/exec"
@@ -87,9 +89,25 @@ func main() {
 						return err
 					}
 
-					if err := exec.CommandContext(cCtx.Context, "firecracker", "--api-sock", filepath.Join(workingDir, "firecracker.sock")).Run(); err != nil {
+					if err := exec.CommandContext(cCtx.Context, "firecracker", "--api-sock", filepath.Join(workingDir, "firecracker.sock")).Start(); err != nil {
 						return err
 					}
+
+					httpClient := http.Client{
+						Transport: &http.Transport{
+							DialContext: func(_ context.Context, _, _ string) (net.Conn, error) {
+								return net.Dial("unix", filepath.Join(workingDir, "firecracker.sock"))
+							},
+						},
+					}
+
+					httpRequest(&httpClient,
+						"/boot-source",
+						map[string]any{
+							"kernel_image_path": filepath.Join(WORKING_DIRECTORY, "/vmlinux"),
+							"boot_args":         "console=ttyS0 reboot=k panic=1 pci=off init=/blanc/init",
+						},
+					)
 
 					return nil
 				},
